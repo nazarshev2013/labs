@@ -1,7 +1,7 @@
-const userService = require('../services/user.service');
+const userService = require('#services/user.service');
 
-const getUsers = async (request, reply) => {
-  const { increment } = require('../state/request-counter');
+const getUsers = async (_request, _reply) => {
+  const { increment } = require('#state/request-counter');
   increment();
 
   const users = await userService.getPublicUsers();
@@ -9,10 +9,10 @@ const getUsers = async (request, reply) => {
 };
 
 const getUserById = async (request, reply) => {
-  const { increment } = require('../state/request-counter');
+  const { increment } = require('#state/request-counter');
   increment();
 
-  const userRepository = require('../repositories/user.repository');
+  const userRepository = require('#repositories/user.repository');
   const { id } = request.params;
   const user = await userRepository.findById(id);
   if (!user) {

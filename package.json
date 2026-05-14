@@ -1,10 +1,48 @@
 {
-  "name": "node-modules-challenge-root",
+  "name": "lab-3-common-server",
   "version": "1.0.0",
   "private": true,
+  "description": "Lab 3 CommonJS server (Fastify): modular layout, Ajv, ESLint, Prettier",
+  "main": "server.js",
+  "type": "commonjs",
+  "engines": {
+    "node": ">=18.18.0"
+  },
+  "imports": {
+    "#controllers/*": "./controllers/*.js",
+    "#services/*": "./services/*.js",
+    "#routes/*": "./routes/*.js",
+    "#config/*": "./config/*.js",
+    "#repositories/*": "./repositories/*.js",
+    "#utils/*": "./utils/*.js",
+    "#state/*": "./state/*.js",
+    "#validators/*": "./validators/*.js",
+    "#plugins/error-handler": "./plugins/error-handler/index.js"
+  },
   "scripts": {
-    "setup": "cd cjs-challenge && npm install && cd ../esm-challenge && npm install",
-    "start:cjs": "cd cjs-challenge && npm start",
-    "start:esm": "cd esm-challenge && npm start"
+    "start": "node --env-file=.env server.js",
+    "dev": "node --watch --env-file=.env server.js",
+    "predev": "npm run check",
+    "lint": "eslint .",
+    "lint:fix": "eslint . --fix",
+    "format": "prettier --write .",
+    "format:check": "prettier --check .",
+    "check": "npm run lint && npm run format:check",
+    "setup:challenge": "cd cjs && npm install && cd ../esm && npm install",
+    "start:cjs": "cd cjs && npm start",
+    "start:esm": "cd esm && npm start"
+  },
+  "dependencies": {
+    "ajv": "^8.12.0",
+    "ajv-formats": "^2.1.1",
+    "fastify": "^4.26.1",
+    "fastify-plugin": "^5.1.0"
+  },
+  "devDependencies": {
+    "@eslint/js": "^9.15.0",
+    "eslint": "^9.15.0",
+    "eslint-config-prettier": "^9.1.0",
+    "globals": "^15.12.0",
+    "prettier": "^3.4.0"
   }
 }
